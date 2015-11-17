@@ -22,6 +22,9 @@
 	
 	<!-- 登录页面不过滤 -->
     <http pattern="/login" security="none" />
+    <!-- 主页不过滤 -->
+	<http pattern="/" security="none" />
+	<http pattern="/home" security="none" />
 		
     <http auto-config="true" 
 		access-denied-page="/denied">
@@ -29,13 +32,16 @@
 		<intercept-url pattern="/index" access="ROLE_USER" /> -->
 
 		<!-- 自定义登录页面 -->
-		<form-login login-page="/login" default-target-url="/common/book/list"
+		<form-login login-page="/login" default-target-url="/home"
 			authentication-failure-url="/login?error" username-parameter="username"
 			password-parameter="password" />
 		<logout invalidate-session="true" logout-success-url="/login?logout" logout-url="/j_spring_security_logout"/>
-		
-		<!-- session超时后重定向的登陆页面 -->
-        <session-management invalid-session-url="/login" />
+        
+        <!-- 限制一个用户只能登录一次 -->
+        <session-management invalid-session-url="/login">   
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />   
+        </session-management>
+        
         
 		<!-- 自定义filter -->
 		<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR"/> 

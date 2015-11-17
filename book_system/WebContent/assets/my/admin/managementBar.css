@@ -1,0 +1,19 @@
+#adminManagementBar{
+	margin-top: 15%;
+	width: 15%;
+	font-size: 115%;
+	text-align: center;
+	border-bottom: #F5F5DC;
+}
+
+#manageOne .dropdown-menu{
+	top: -1%;
+    width: 100%;
+}
+
+.title{
+	float: left;
+	margin-left: 40%;
+	margin-top: -10%;
+	font-size: 30px;
+}

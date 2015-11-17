@@ -1,0 +1,41 @@
+.nar_page{
+	margin-left: 35%;
+}
+
+.nar_page #btn_prev1{
+	background-color: #66FFFF;
+}
+.nar_page #btn_prev1:HOVER{
+	background-color: #33CCCC;
+}
+.nar_page #btn_prev2{
+	background-color: #66FFFF;
+}
+.nar_page #btn_prev2:HOVER{
+	background-color: #33CCCC;
+}
+
+.nar_page #btn_next1{
+	background-color: #0099CC;
+	color: #FFFFFF
+}
+.nar_page #btn_next1:HOVER{
+	background-color: #0066CC;
+	color: #FFFFFF
+}
+.nar_page #btn_next2{
+	background-color: #0099CC;
+	color: #FFFFFF
+}
+.nar_page #btn_next2:HOVER{
+	background-color: #0066CC;
+	color: #FFFFFF
+}
+.nar_page #btn_next3{
+	background-color: #0099CC;
+	color: #FFFFFF
+}
+.nar_page #btn_next3:HOVER{
+	background-color: #0066CC;
+	color: #FFFFFF
+}
