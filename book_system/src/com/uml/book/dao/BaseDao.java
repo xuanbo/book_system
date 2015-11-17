@@ -2,7 +2,6 @@ package com.uml.book.dao;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 public interface BaseDao<T ,ID extends Serializable>{
 
@@ -61,24 +60,5 @@ public interface BaseDao<T ,ID extends Serializable>{
 	 * @param id
 	 */
 	public void batchDelete(ID[] ids);
-	
-	/**
-	 * 根据对象集合批量删除记录
-	 * @param os
-	 */
-	public void batchDeleteSet(Set<T> os);
-	/**
-	 * 分页获取记录
-	 * @param currentPage   当前页面
-	 * @param showNumber    每一个页面要显示的数目
-	 * @return
-	 */
-	public List<T> getByPage(int currentPage, int showNumber);
-	
-	/**
-	 * 获取记录的数目
-	 * @return
-	 */
-	public long getTotalCount();
 }
 

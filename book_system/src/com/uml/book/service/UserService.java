@@ -19,30 +19,4 @@ public interface UserService {
 	public boolean isFindPasswordByUserName(String username,String password);
 	
 	public List<User> getByName(String name);
-
-	/**
-	 * 根据角色名获取记录
-	 * @param roleName
-	 * @return
-	 */
-	public List<User> getUser(String roleName);
-	
-	/**
-	 * 根据对象跟新记录
-	 * @param user
-	 */
-	public void update(User user);
-	
-	/**
-	 * 根据对象删除记录
-	 * @param user
-	 */
-	public void delete(User user);
-	
-	/**
-	 * 根据id获取记录
-	 * @param id
-	 * @return
-	 */
-	public User get(int id);
 }

@@ -25,7 +25,7 @@ public class Order {
 	private Date orderTime;           //预约的时间
 	private Date borrowTime;          //借阅的时间
 	private Date returnTime;          //归还时间
-	private boolean overdue;         //是否逾期  1代表逾期
+	private boolean overdue;         //是否逾期
 	private User user;               //每一条订单只有一用户
 	private Book book;               //每一条订单一本书
 	
@@ -94,7 +94,6 @@ public class Order {
 	@JoinTable(name = "userOrder" ,
 	joinColumns = { @JoinColumn( name ="orderId" )},
 	inverseJoinColumns = { @JoinColumn( name = "userId") })
-	@JoinColumn( name = "userId")
 	public User getUser() {
 		return user;
 	}
@@ -105,8 +104,7 @@ public class Order {
 	@OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	@JoinTable(name = "orderBook" ,
 	joinColumns = { @JoinColumn( name ="orderId" )},
-	inverseJoinColumns = { @JoinColumn( name = "bookId") }) 
-	@JoinColumn( name = "bookId")
+	inverseJoinColumns = { @JoinColumn( name = "bookId") })
 	public Book getBook() {
 		return book;
 	}

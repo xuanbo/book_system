@@ -19,7 +19,7 @@
     <div id="div_center">   
        <p>欢迎登录图书管理系统</p>      
        <div class="inputUP">
-           <input class="inputUsername" type="text" name="username" placeholder="请输入借阅证号：">
+           <input class="inputUsername" type="text" name="username" placeholder="请输入用户名：">
            <br>
            <input class="inputPassword" type="password" name="password" placeholder="请输入密码：">
        </div>
@@ -30,14 +30,13 @@
     
 <script type="text/javascript">
    $(function(){
-	   
 	   $("body").addClass('backgroundImage1');
 	   //每5秒更换一次背景图片
 	   setInterval(changeBackgroundImage,5000);
 	   
 	   function changeBackgroundImage(){
 		   $("body").toggleClass('backgroundImage1').toggleClass('backgroundImage2');
-	   };
+	   }
 	   
 	   $('.inputLogin').on('click',function(){
 		   var username = $('.inputUsername').val();
@@ -55,7 +54,7 @@
 			   data: data,
 			   success: function(msg){
 				   if(msg){
-					   window.location.assign('home');
+					   window.location.assign('common/book/list');
 				   }
 			   }
 		   });

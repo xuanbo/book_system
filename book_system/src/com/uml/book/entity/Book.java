@@ -17,43 +17,36 @@ import javax.persistence.Table;
 @Table(name = "book")
 public class Book {
 	private Integer id;
-	private String bookId;           //书的编号
 	private String name;             //书名
 	private String writer;           //作者
 	private String description;      //书的具体描述
-	private int totalNumber;         //书籍的总的数量
-	private int bookNumber;         //未借出的书籍数目
-	private int restNumber;         //剩余能预约的书籍数目
+	private String bookNumber;       //书籍的数目
+	private String restNumber;       //剩余的书籍数目
 	private String country;          //哪一个国家
 	private String style;            //书的类型
 	private String bookUrl;          //存储书的图片的url
-	private Set<Order> orders;       //书的借阅
-	private int flag;               //删除标志     1为删除
- 
+	private Set<Order> orders;       //书的借阅	
+
 	public Book() {
 		super();
 	}
 
-	public Book(Integer id, String bookId, String name, String writer,
-			String description, int totalNumber, int bookNumber,
-			int restNumber, String country, String style, String bookUrl,
-			Set<Order> orders, int flag) {
+	public Book(Integer id, String name, String writer, String description,
+			String bookNumber, String restNumber, String country, String style,
+			String bookUrl, Set<Order> orders) {
 		super();
 		this.id = id;
-		this.bookId = bookId;
 		this.name = name;
 		this.writer = writer;
 		this.description = description;
-		this.totalNumber = totalNumber;
 		this.bookNumber = bookNumber;
 		this.restNumber = restNumber;
 		this.country = country;
 		this.style = style;
 		this.bookUrl = bookUrl;
 		this.orders = orders;
-		this.flag = flag;
 	}
-
+	
 	@Id
 	@GeneratedValue
 	public Integer getId() {
@@ -61,14 +54,6 @@ public class Book {
 	}
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getBookId() {
-		return bookId;
-	}
-
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
 	}
 
 	public String getName() {
@@ -91,25 +76,18 @@ public class Book {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public int getTotalNumber() {
-		return totalNumber;
-	}
-	public void setTotalNumber(int totalNumber) {
-		this.totalNumber = totalNumber;
-	}
 
-	public int getBookNumber() {
+	public String getBookNumber() {
 		return bookNumber;
 	}
-	public void setBookNumber(int bookNumber) {
+	public void setBookNumber(String bookNumber) {
 		this.bookNumber = bookNumber;
 	}
 
-	public int getRestNumber() {
+	public String getRestNumber() {
 		return restNumber;
 	}
-	public void setRestNumber(int restNumber) {
+	public void setRestNumber(String restNumber) {
 		this.restNumber = restNumber;
 	}
 
@@ -141,12 +119,6 @@ public class Book {
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
-
-	public int getFlag() {
-		return flag;
-	}
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
+	
 	
 }

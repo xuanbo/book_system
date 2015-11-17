@@ -25,24 +25,19 @@ public class User {
 	private Integer id; 
 	private String name;         //用户名
 	private String password;     //用户密码
-	private int borrowBookNumber;//用户借书的本数
-	private int orderBookNumber; //用户预定的本数
 	private Set<Role> roles;     //每个用户拥有不同的权限
 	private Status status;       //一个用户自能拥有一种身份
-	private Set<Order> orders;    //一个用户拥有多条订单
-
-	public User(Integer id, String name, String password, int borrowBookNumber,
-			int orderBookNumber, Set<Role> roles, Status status,
-			Set<Order> orders) {
+	private Set<Order> order;    //一个用户拥有多条订单
+	
+	public User(Integer id, String name, String password, Set<Role> roles,
+			Status status, Set<Order> order) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.password = password;
-		this.borrowBookNumber = borrowBookNumber;
-		this.orderBookNumber = orderBookNumber;
 		this.roles = roles;
 		this.status = status;
-		this.orders = orders;
+		this.order = order;
 	}
 
 	public User() {
@@ -70,24 +65,10 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}	
-	
-	public int getBorrowBookNumber() {
-		return borrowBookNumber;
-	}
-	public void setBorrowBookNumber(int borrowBookNumber) {
-		this.borrowBookNumber = borrowBookNumber;
-	}
-
-	public int getOrderBookNumber() {
-		return orderBookNumber;
-	}
-	public void setOrderBookNumber(int orderBookNumber) {
-		this.orderBookNumber = orderBookNumber;
 	}
 
 	//主控方
-	@ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	@JoinTable(name = "userRole" ,
 	joinColumns = { @JoinColumn( name ="userId" )},
 	inverseJoinColumns = { @JoinColumn( name = "roleId") })
@@ -99,7 +80,7 @@ public class User {
 	}
 
 	//写了mappedBy就代表这个方法的返回值是被维护方
-    @ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
 	@JoinTable(name = "userStatus" ,
 	joinColumns = { @JoinColumn( name ="userId" )},
 	inverseJoinColumns = { @JoinColumn( name = "statusId") })
@@ -112,11 +93,11 @@ public class User {
 
 	//写了mappedBy就代表这个方法的返回值是被维护方
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
-	public Set<Order> getOrders() {
-		return orders;
+	public Set<Order> getOrder() {
+		return order;
 	}
-	public void setOrders(Set<Order> orders) {
-		this.orders = orders;
+	public void setOrder(Set<Order> order) {
+		this.order = order;
 	}
 	
 	
