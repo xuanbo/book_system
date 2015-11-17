@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+			 xmlns:context="http://www.springframework.org/schema/context" 
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			 					 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			 					 http://www.springframework.org/schema/context 
+	   							 http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+			 					 http://www.springframework.org/schema/security 
+			 					 http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	<!-- declaring base package -->
+	<context:component-scan base-package="com.uml.book" />
+	
+	<!-- enable auto wire -->
+	<context:annotation-config />
+	
+	<!-- css,img,js不过滤  -->
+	<http pattern="/js/**" security="none" />
+	<http pattern="/img/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	
+	<!-- 登录页面不过滤 -->
+    <http pattern="/login" security="none" />
+		
+    <http auto-config="true" 
+		access-denied-page="/denied">
+		<!-- <intercept-url pattern="/admin**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/index" access="ROLE_USER" /> -->
+
+		<!-- 自定义登录页面 -->
+		<form-login login-page="/login" default-target-url="/common/book/list"
+			authentication-failure-url="/login?error" username-parameter="username"
+			password-parameter="password" />
+		<logout invalidate-session="true" logout-success-url="/login?logout" logout-url="/j_spring_security_logout"/>
+		
+		<!-- session超时后重定向的登陆页面 -->
+        <session-management invalid-session-url="/login" />
+        
+		<!-- 自定义filter -->
+		<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR"/> 
+	</http>
+
+
+
+	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="customUserDetailsService">
+			<!--  <password-encoder ref="passwordEncoder" />  -->
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 密码加密方式 
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+    -->
+    
+	<!-- 自定义用户验证服务 -->
+	<beans:bean id="customUserDetailsService"
+		class="com.uml.book.security.CustomUserDetailsService" />
+
+	<!-- 资源源数据定义，即定义某一资源可以被哪些角色访问 -->
+	<beans:bean id="customFilterInvocationSecurityMetadataSource"
+		class="com.uml.book.security.CustomFilterInvocationSecurityMetadataSource" >
+		<!-- 如果service注解不进去 -->
+		<beans:constructor-arg name="resourceService" ref="resourceService" />
+    </beans:bean>
+		
+
+	<!-- 自定义访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<beans:bean id="customAccessDecisionManager"
+		class="com.uml.book.security.CustomAccessDecisionManager" 
+		/>
+
+	<!-- 自定义Filter -->
+	<beans:bean id="customFilter"
+		class="com.uml.book.security.CustomFilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="customAccessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="customFilterInvocationSecurityMetadataSource" />
+	</beans:bean> 
+
+</beans:beans>

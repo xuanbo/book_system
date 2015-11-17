@@ -1,0 +1,77 @@
+.searchBar{
+	margin-top: 8%;
+}
+
+#bookStyle1{
+	float: left;
+	margin-left: 2%;
+	width: 8%;
+	height: 10%;
+	text-align: center;
+	line-height: 30px;
+}
+
+#bookStyle2{
+	float: left;
+	width: 20%;
+	height: 10%;
+}
+
+#search{
+	margin-left: 3%;
+	width: 6%;
+	border-radius: 20px;
+}
+
+.book_center{
+	margin-top: 1%;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+}
+
+.book_center .book_url{
+	float: left;
+	width: 25%;
+	height: 40%;
+	border: 1px solid #000000;
+}
+
+.book_center .book_url img{
+	width: 100%;
+	height: 100%;
+}
+
+.book_center .book_info{
+	margin-left: 30%;
+	width: 70%;
+	height: 50%;
+	border: 1px solid #000000;
+}
+
+.book_info_text{
+	width: 100%;
+	height: 100%;
+}
+
+.btn_order{
+	margin-top: 5%;
+	margin-left: 90%;
+	width: 8%;
+	height: 18%;
+	color: #FFFFFF;
+	border: 1px solid #2F4F4F;
+	background-color: #2F4F4F;
+	border-radius: 45px;
+}
+
+.btn_order:HOVER {
+	margin-top: 5%;
+	margin-left: 90%;
+	width: 10%;
+	height: 22%;
+	color: #FFFFFF;
+	border: 1px solid #2F4F6F;
+	background-color: #2F4F6F;
+	border-radius: 60px;
+}
