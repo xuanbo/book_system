@@ -5,9 +5,36 @@ import java.util.List;
 import com.uml.book.entity.Order;
 
 public interface OrderDao extends BaseDao<Order,Integer>{
+	
 	/**
-	 * 覆盖父接口中的getAll方法，父方法中的getAll对于orderDao失效
-	 * 由于order与数据库中的关键字冲突，表的名字在实体类后加了‘s’，即表名改为了orders
+	 * 获取用户id为userId的预约成功记录数
+	 * @param userId
+	 * @return
 	 */
-	public List<Order> getAll();
+	public int getOrderSuccessNumber(int userId);
+	
+	/**
+	 * 根据用户id获取某个用户的预约状态记录
+	 * @param userId
+	 * @param state
+	 * @return
+	 */
+	public List<Order> getAllOrderStateOfSomeone(int userId, String state);
+	
+	/**
+	 * 任意字段查询记录
+	 * @param userId
+	 * @param state
+	 * @param bookId
+	 * @return
+	 */
+	public List<Order> getByConditionParam(int userId, String state, int bookId);
+	
+	/**
+	 * 获取某个预约状态的记录数目
+	 * @param state
+	 * @return
+	 */
+	public int getOrderStateNumber(String state);
+	
 }

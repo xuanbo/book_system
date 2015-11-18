@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -90,6 +91,32 @@ public class BaseDaoImpl<T, ID extends Serializable> implements BaseDao<T, ID> {
 			this.delete(id);
 		}
 		this.getHibernateSession().flush();
+	}
+
+	@Override
+	public void batchDeleteSet(Set<T> ts){
+		for(T t : ts){
+			this.delete(t);
+		}
+		this.getHibernateSession().flush();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> getByPage(int currentPage, int showNumber) {
+		String hql = "from " + entityClass.getName(); 
+		Query query = this.getHibernateSession().createQuery(hql);
+	    query.setFirstResult((currentPage - 1) * showNumber);
+	    query.setMaxResults(showNumber);
+		return query.list();
+	}
+
+	@Override
+	public long getTotalCount() {
+		String hql = "select count(*) from " + entityClass.getName();
+		Query query = this.getHibernateSession().createQuery(hql);
+		//query.uniqueResult()返回的是long型的数据，只需要做下类型转换就可以了
+		return (long) query.uniqueResult();
 	}
 
 }

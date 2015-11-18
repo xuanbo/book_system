@@ -1,5 +1,7 @@
 package com.uml.book.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uml.book.entity.Role;
+import com.uml.book.entity.User;
 import com.uml.book.security.CustomUserDetailsService;
 import com.uml.book.service.UserService;
 
@@ -60,7 +64,12 @@ public class LoginController {
 		            userDetails, userDetails.getPassword(), userDetails.getAuthorities());  
 		    SecurityContext securityContext = SecurityContextHolder.getContext();  
 		    securityContext.setAuthentication(authentication);    
-		    session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext); 
+		    session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+		    User user = userService.getByName(jsonobject.getString("username")).get(0);
+		    Set<Role> roles = user.getRoles();
+		    for(Role role : roles){
+		    	session.setAttribute("Role", role.getName());
+		    }	    
 			return true;	
 		}else{
 			return false;
