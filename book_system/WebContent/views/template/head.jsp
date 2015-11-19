@@ -62,9 +62,9 @@
       </form>
    -->    
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">联系我们</a></li>
-        <li><a href="#">帮助</a></li>
-        <li><a href="#">后台管理</a></li>        
+      
+        <li><a href="common/aboutUs">关于我们</a></li>
+        <li><a href="#">帮助</a></li>      
         <li class="dropdown">
           
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

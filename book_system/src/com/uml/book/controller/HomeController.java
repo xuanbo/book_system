@@ -15,4 +15,9 @@ public class HomeController {
 	public String home(){
 		return "home";	
 	}
+	
+	@RequestMapping(value="common/aboutUs", method = RequestMethod.GET)
+	public String aboutUs(){
+		return "aboutUs";
+	}
 }
