@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.uml.book.dao.BaseDao;
 
-public class BaseDaoImpl<T, ID extends Serializable> implements BaseDao<T, ID> {
+public abstract class BaseDaoImpl<T, ID extends Serializable> implements BaseDao<T, ID> {
 	
 	private Class<T> entityClass;
 

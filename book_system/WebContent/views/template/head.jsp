@@ -83,10 +83,10 @@
               <a>您好， <span id="role">${SPRING_SECURITY_CONTEXT.getAuthentication().getName() }</span></a>
             </li>
             <li id="myOrder">
-               <a href="#" style="text-align: center">我的预约</a>                    
+               <a href="common/myOrderList" style="text-align: center">我的预约</a>                    
             </li>
             <li id="myBorrow">
-               <a href="#" style="text-align: center">我的借阅</a>                    
+               <a href="common/myBorrowList" style="text-align: center">我的借阅</a>                    
             </li>     
             <li role="separator" class="divider"></li>
             <li id="logout" style="text-align: center"><a href="j_spring_security_logout">退出</a></li>

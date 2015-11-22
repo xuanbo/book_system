@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,4 +62,29 @@ public class OrderController {
 		}					
 	}
 	
+	@RequestMapping(value="/common/myOrderList", method = RequestMethod.GET)
+	public String myOrder(Model model, HttpServletRequest request){
+		/**
+		 * 获取session中的用户名
+		 * 通过用户名获取到user对象
+		 */
+		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		String username = securityContextImpl.getAuthentication().getName();
+		User user = userService.getByName(username).get(0);
+	    model.addAttribute("myOrders", orderService.getByConditionParam(user.getId(), "预约成功", 0));
+		return "user/orderList";
+	}
+	
+	@RequestMapping(value="/common/myBorrowList", method = RequestMethod.GET)
+	public String myBorrow(Model model, HttpServletRequest request){
+		/**
+		 * 获取session中的用户名
+		 * 通过用户名获取到user对象
+		 */
+		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		String username = securityContextImpl.getAuthentication().getName();
+		User user = userService.getByName(username).get(0);
+	    model.addAttribute("myBorrows", orderService.getByConditionParam(user.getId(), "已借出", 0));
+		return "user/borrowList";
+	}
 }
